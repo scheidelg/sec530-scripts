@@ -33,6 +33,12 @@ Set-Location /var/www/sec530-wiki
 git reset --hard origin/mkdocs-migration
 git pull | Tee-Object -variable strWikiGitResults
 
+# Update content in the /scripts directory structure, discarding any local
+# changes to files.
+Set-Location /scripts
+git reset --hard origin/master
+git pull
+
 # Check the results of the Wiki 'git pull'; if there were any updates, then
 # rebuild the Wiki site.
 if($strWikiGitResults -ne 'Already up-to-date.'){
@@ -50,3 +56,36 @@ if($strWikiGitResults -ne 'Already up-to-date.'){
 if((Test-Path -Path '/var/www/sec530-wiki/labyrinth') -and -not(Test-Path -Path '/var/www/sec530-wiki/labyrinth/weblabyrinth')){
     ln -s /opt/weblabyrinth/ /var/www/sec530-wiki/labyrinth
 }
+
+# As a final step, update this script file.
+#
+# We can't directly maintain this file on the GitHub repository.  If we did,
+# then running the 'git pull' would potentially update this script while it
+# was running and cause a problem if the running process refers to the source
+# file.  Instead we use the following steps:
+#
+#  - Update the /scripts/master/wiki_update.ps1 as part of the 'git pull'
+#    (executed above when updating the /scripts directory).
+#
+#    That file is considered the master copy of the wiki_update.ps1 script.
+#
+#  - Rename the running /scripts/wiki_update.ps1 file.
+#
+#    Since we're renaming within the same file system, its inode is preserved
+#    and the running process continues without errors until exit.
+#
+#  - Copy the new /scripts/master/wiki_update.ps1 file to
+#    /scripts/wiki_update.ps1.
+#
+#    The new version of the file is now ready for the next execution of
+#    /scripts/wiki_update.ps1.
+
+# Continue if:
+#  - /scripts/master/wiki_update.ps1 exists
+#  - /scripts/master/wiki_update.ps1 and /scripts/wiki_update.ps1 aren't the
+#    same
+if((Test-Path -Path '/scripts/master/wiki_update.ps1') -and ((Get-FileHash /scripts/wiki_update.ps1 -Algorithm 'SHA256').Hash -ne (Get-FileHash /scripts/master/wiki_update.ps1 -Algorithm 'SHA256').Hash)){
+    "bob's your uncle"
+}
+
+#=============================================================================
