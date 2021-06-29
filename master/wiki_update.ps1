@@ -92,7 +92,7 @@ if((Test-Path -Path '/scripts/master/wiki_update.ps1') -and ((Get-FileHash /scri
         New-Item -Path /scripts/ -Name backup -ItemType Directory | Out-Null
     }
 
-    # move rename the running /scripts/wiki_update.ps1 file
+    # move and rename the running /scripts/wiki_update.ps1 file
     Move-Item -Path /scripts/wiki_update.ps1 -Destination ('/scripts/backup/wiki_update.ps1.' + (Get-Date -format 'yyyy-MM-dd.HH-mm-ss'))
 }
 
