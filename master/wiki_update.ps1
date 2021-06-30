@@ -57,12 +57,20 @@ if((Test-Path -Path '/var/www/sec530-wiki/labyrinth') -and -not(Test-Path -Path 
     ln -s /opt/weblabyrinth/ /var/www/sec530-wiki/labyrinth
 }
 
+# Run the second stage script that allows us to update content outside of the
+# directories under Git version control (i.e., outside of those noted above,
+# for which we ran 'git pull').
+Invoke-Expression -Command /scripts/stage2.ps1
+
 # As a final step, update this script file.
 #
 # We can't directly maintain this file on the GitHub repository.  If we did,
 # then running the 'git pull' would potentially update this script while it
 # was running and cause a problem if the running process refers to the source
-# file.  Instead we use the following steps:
+# file.  Likewise, we should avoid updating this file via the second stage
+# script (above).
+#
+# Instead we use the following steps:
 #
 #  - Update the /scripts/master/wiki_update.ps1 as part of the 'git pull'
 #    (executed above when updating the /scripts directory).
