@@ -105,7 +105,7 @@ if((Test-Path -Path '/scripts/master/wiki_update.ps1') -and ((Get-FileHash /scri
     # If there are more than 3 backup files, then delete the oldest file.
     $intBackupCount = (Get-ChildItem -File /scripts/backup | Measure-Object).Count
     if ($intBackupCount -ge 3){
-        Get-ChildItem -Path /scripts/backup | Sort-Object LastWriteTime | Select-Object -First (3-$intBackupCount) | Remove-Item
+        Get-ChildItem -Path /scripts/backup | Sort-Object LastWriteTime | Select-Object -First ($intBackupCount-3) | Remove-Item
     }
 }
 
