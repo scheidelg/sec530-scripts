@@ -101,6 +101,11 @@ if((Test-Path -Path '/scripts/master/wiki_update.ps1') -and ((Get-FileHash /scri
     # Copy the new /scripts/master/wiki_update.ps1 file to
     # /scripts/wiki_update.ps1.
     Copy-Item -Path /scripts/master/wiki_update.ps1 -Destination /scripts/wiki_update.ps1
+
+    # If there are more than 3 backup files, then delete the oldest file.
+    if ((Get-ChildItem -File /scripts/backup | Measure-Object).Count -ge 3){
+        'bob'
+    }
 }
 
 #=============================================================================
