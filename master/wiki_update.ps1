@@ -10,7 +10,6 @@
 # 2020.06.14   IV    Added Wiki rebuild after 'git pull' commands
 #
 # 2020.06.28   GJS
-#
 #  - organized commands into logical blocks
 #  - moved Wiki rebuild and clearing Google Chrome cache to an 'if' block;
 #    only execute if updates to source content were retrieved
@@ -116,5 +115,3 @@ if((Test-Path -Path '/scripts/master/wiki_update.ps1') -and ((Get-FileHash /scri
         Get-ChildItem -Path /scripts/backup | Sort-Object LastWriteTime | Select-Object -First ($intBackupCount-3) | Remove-Item
     }
 }
-
-#=============================================================================
