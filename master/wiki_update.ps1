@@ -85,15 +85,22 @@ if((Test-Path -Path '/var/www/sec530-wiki/labyrinth') -and -not(Test-Path -Path 
 #  - /scripts/master/wiki_update.ps1 and /scripts/wiki_update.ps1 aren't the
 #    same
 if((Test-Path -Path '/scripts/master/wiki_update.ps1') -and ((Get-FileHash /scripts/wiki_update.ps1 -Algorithm 'SHA256').Hash -ne (Get-FileHash /scripts/master/wiki_update.ps1 -Algorithm 'SHA256').Hash)){
-    # Make sure that the /scripts/backup directory exists.  This is where
-    # we'll keep up to 3 old copies of the wiki_update.ps1 script (for
-    # emergency recovery).
+    # The /scripts/backup directory is where we'll move the wiki_update.ps1
+    # script.  This will also serve to hold older copies of the
+    # wiki_update.ps1 script for emergency recovery.
+    #
+    # If the directory doesn't already exists, then create it.
     if (-not(Test-Path -Path /scripts/backup)){
         New-Item -Path /scripts/ -Name backup -ItemType Directory | Out-Null
     }
 
-    # move and rename the running /scripts/wiki_update.ps1 file
+    # Move and rename the running /scripts/wiki_update.ps1 file.  Rename by
+    # appending the current date and time.
     Move-Item -Path /scripts/wiki_update.ps1 -Destination ('/scripts/backup/wiki_update.ps1.' + (Get-Date -format 'yyyy-MM-dd.HH-mm-ss'))
+
+    # Copy the new /scripts/master/wiki_update.ps1 file to
+    # /scripts/wiki_update.ps1.
+    Copy-Item -Path /scripts/master/wiki_update.ps1 -Destination /scripts/wiki_update.ps1
 }
 
 #=============================================================================
