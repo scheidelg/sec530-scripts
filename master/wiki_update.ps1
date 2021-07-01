@@ -17,6 +17,9 @@
 #    /var/www/sec530-wiki/labyrinth/weblabyrinth, to avoid an error condition
 #    where the 'ln' command attempts to create a symlink over an existing file
 #  - added comments
+#
+# 2020.06.30   GJS   Replaced the 'ln' command with 'New-Item' to create the
+#                    /var/www/sec530-wiki/labyrinth/weblabyrinth symlink.
 #-----------------------------------------------------------------------------
 
 # Update content in the /labs directory structure, discarding any local
@@ -54,7 +57,6 @@ if($strWikiGitResults -ne 'Already up-to-date.'){
 # /var/www/sec530-wiki/labyrinth/weblabyrinth.
 if((Test-Path -Path '/var/www/sec530-wiki/labyrinth') -and -not(Test-Path -Path '/var/www/sec530-wiki/labyrinth/weblabyrinth')){
     New-Item -target /opt/weblabyrinth/ -itemType SymbolicLink -path /var/www/sec530-wiki/labyrinth/weblabyrinth
-#    ln -s /opt/weblabyrinth/ /var/www/sec530-wiki/labyrinth
 }
 
 # Run the second stage script that allows us to update content outside of the
