@@ -25,6 +25,14 @@
 # 2020.06.29   GJS   Original script
 #-----------------------------------------------------------------------------
 
+#=============================================================================
+Function executeOnceCheck($tagToCheck)
+{
+    True
+}
+
+#=============================================================================
+# main script
 #-----------------------------------------------------------------------------
 # Use this section to execute commands that are executed every time the Wiki
 # update process is run.  No special checks are performed before executing
@@ -48,13 +56,4 @@ if (executeOnceCheck('testtag')){
 
 
 # Use this section to execute commands that are executed 
-
-# do whatever you need to do...
-
-# now update the primary wiki_update.ps1 script
-
-#=============================================================================
-Function executeOnceCheck($tagToCheck)
-{
-    True
-}
+# blah, blah, blah...
