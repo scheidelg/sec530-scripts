@@ -25,11 +25,22 @@
 # 2020.06.29   GJS   Original script
 #-----------------------------------------------------------------------------
 
+#-----------------------------------------------------------------------------
 # Use this section to execute commands that are executed every time the Wiki
 # update process is run.  No special checks are performed before executing
 # the commands.
 
-# Invoke-Expression -Command /scripts/stage2.ps1
+# Invoke-Expression -Command /scripts/example.ps1
+
+#-----------------------------------------------------------------------------
+# Use this section to execute commands that are executed only once.
+#
+# Call the executeOnce() function once for each 
+
+#-----------------------------------------------------------------------------
+# Use this section to execute commands that are executed only when
+# specifically requested.
+
 
 
 # Use this section to execute commands that are executed 
