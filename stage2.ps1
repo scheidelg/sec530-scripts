@@ -28,6 +28,21 @@
 #=============================================================================
 Function executeOnceCheck($tagToCheck)
 {
+# check the tags file
+    $true
+}
+
+#=============================================================================
+Function executeOnceSaveTag($tagToCheck)
+{
+# update the tags file - include tag and date info
+    $true
+}
+
+#=============================================================================
+Function executeOnDemandCheck($tagToCheck)
+{
+# check to see if this tag was one of the arguments passed to the script
     $true
 }
 
@@ -42,18 +57,25 @@ Function executeOnceCheck($tagToCheck)
 
 #-----------------------------------------------------------------------------
 # Use this section to execute commands that are executed only once.
-#
-# Call the executeOnce() function once for each set of commands
 
-if (executeOnceCheck('testtag')){
-    'testtag echo'
+$currentTag='execute once tag'  # use var to avoid typos between here and executeOnceSaveTag() call
+if (executeOnceCheck($currentTag)){
+    # put commands here
+    $currentTag
+
+    executeOnceSaveTag($currentTag)
 }
+
+# Clean up the tags in the tag file; delete anything over 90 days old
 
 #-----------------------------------------------------------------------------
 # Use this section to execute commands that are executed only when
 # specifically requested.
 
-
+if (executeOnDemandCheck('execute on demand tag'))
+    # put commands here
+    'execute on demand tag'
+}
 
 # Use this section to execute commands that are executed 
 # blah, blah, blah...
