@@ -36,7 +36,6 @@ Function executeOnceCheck($tagToCheck)
 Function executeOnceSaveTag($tagToCheck)
 {
 # update the tags file - include tag and date info
-    $true
 }
 
 #=============================================================================
