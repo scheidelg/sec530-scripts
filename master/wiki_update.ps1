@@ -53,7 +53,8 @@ if($strWikiGitResults -ne 'Already up-to-date.'){
 # symbolic link from /opt/weblabyrinth to
 # /var/www/sec530-wiki/labyrinth/weblabyrinth.
 if((Test-Path -Path '/var/www/sec530-wiki/labyrinth') -and -not(Test-Path -Path '/var/www/sec530-wiki/labyrinth/weblabyrinth')){
-    ln -s /opt/weblabyrinth/ /var/www/sec530-wiki/labyrinth
+    New-Item -target /opt/weblabyrinth/ -itemType SymbolicLink -path /var/www/sec530-wiki/labyrinth/weblabyrinth
+#    ln -s /opt/weblabyrinth/ /var/www/sec530-wiki/labyrinth
 }
 
 # Run the second stage script that allows us to update content outside of the
