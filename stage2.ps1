@@ -72,7 +72,7 @@ if (executeOnceCheck($currentTag)){
 # Use this section to execute commands that are executed only when
 # specifically requested.
 
-if (executeOnDemandCheck('execute on demand tag'))
+if (executeOnDemandCheck('execute on demand tag')){
     # put commands here
     'execute on demand tag'
 }
