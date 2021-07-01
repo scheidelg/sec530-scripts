@@ -35,7 +35,11 @@
 #-----------------------------------------------------------------------------
 # Use this section to execute commands that are executed only once.
 #
-# Call the executeOnce() function once for each 
+# Call the executeOnce() function once for each set of commands
+
+if (executeOnceCheck('testtag')){
+    'testtag echo'
+}
 
 #-----------------------------------------------------------------------------
 # Use this section to execute commands that are executed only when
@@ -48,4 +52,9 @@
 # do whatever you need to do...
 
 # now update the primary wiki_update.ps1 script
-'bob, uncle'
+
+#=============================================================================
+Function executeOnceCheck($tagToCheck)
+{
+    True
+}
