@@ -448,7 +448,7 @@ function _Exercise-2.4-postcheck {
     iptables-Rule-Delete 'OUTPUT' 'LOGGING all -- 0.0.0.0/0 172.17.0.3'
 
     # flush all rules from and delete LOGGING
-    foreach ($iptables_command in ('-F LOGGING', '-X LOGGING') {
+    foreach ($iptables_command in ('-F LOGGING', '-X LOGGING')) {
         # run the iptables command, filtering out the 'No chain/target/match by
         # that name' error
         $iptables_output = (iptables $iptables_command 2>&1) | Select-String -SimpleMatch 'iptables: No chain/target/match by that name.' -NotMatch
@@ -894,7 +894,7 @@ function _Exercise-egress-postcheck {
     iptables-Rule-Delete 'OUTPUT' 'DROP tcp -- 0.0.0.0/0 5.30.5.0/24 tcp dpt:10000'
 
     # flush all rules from and delete LOGGING-IN and LOGGING-OUT
-    foreach ($iptables_command in ('-F LOGGING-IN', '-X LOGGING-IN', '-F LOGGING-OUT', '-X LOGGING-OUT') {
+    foreach ($iptables_command in ('-F LOGGING-IN', '-X LOGGING-IN', '-F LOGGING-OUT', '-X LOGGING-OUT')) {
         # run the iptables command, filtering out the 'No chain/target/match by
         # that name' error
         $iptables_output = (iptables $iptables_command 2>&1) | Select-String -SimpleMatch 'iptables: No chain/target/match by that name.' -NotMatch
